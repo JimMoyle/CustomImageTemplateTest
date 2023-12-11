@@ -7,7 +7,7 @@ Add-AppPackage -Path $outFile
 Write-Output 'Testing for Winget'
 try {
     Get-AppxPackage -Name Microsoft.DesktopAppInstaller -ErrorAction Stop
-    Write-Output 'Winget Present'
+    Write-Output 'Winget Present From download'
 }
 catch {
     Write-Output 'Trying to add local winget'
