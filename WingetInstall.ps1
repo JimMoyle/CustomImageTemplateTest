@@ -12,7 +12,7 @@ Write-Output "Download URL is $downloadUrl"
 $outFile = (Join-Path $env:Temp Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
 Write-Output "Downloadlocation is $outFile"
 $out = Invoke-WebRequest -Uri $downloadUrl -OutFile $outFile -PassThru -UseBasicParsing
-Write-Output "Downloaded stuscode $out.StatusCode"
+Write-Output "Downloaded statuscode $out.StatusCode"
 Add-AppPackage -Path $outFile
 Write-Output 'Testing for Winget'
 try {
