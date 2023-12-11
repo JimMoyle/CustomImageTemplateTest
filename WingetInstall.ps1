@@ -1,7 +1,7 @@
 Write-OutPut 'Starting WingetInstall.ps1 Jim'
 $outFile = (Join-Path $env:Temp Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
 Write-Output "Downloadlocation is $outFile"
-$out = Invoke-WebRequest -Uri aka.ms/getwinget -OutFile $outFile -PassThru
+$out = Invoke-WebRequest -Uri aka.ms/getwinget -OutFile $outFile -PassThru -UseBasicParsing
 Write-Output "Downloaded stuscode $out.StatusCode"
 Add-AppPackage -Path $outFile
 Write-Output 'Testing for Winget'
