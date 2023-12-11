@@ -1,7 +1,18 @@
+$repoOwner = "Microsoft"
+$repoName = "winget-cli"
+
+# Get the latest release information
+$releaseUrl = "https://api.github.com/repos/$repoOwner/$repoName/releases/latest"
+$releaseInfo = Invoke-RestMethod -Uri $releaseUrl
+
+# Get the download URL for the latest release asset
+$downloadUrl = $releaseInfo.assets | Where-Object { $_.browser_download_url.Split('/')[-1] -eq "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" } | Select-Object -ExpandProperty browser_download_url
+
+
 Write-OutPut 'Starting WingetInstall.ps1 Jim'
 $outFile = (Join-Path $env:Temp Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
 Write-Output "Downloadlocation is $outFile"
-$out = Invoke-WebRequest -Uri aka.ms/getwinget -OutFile $outFile -PassThru -UseBasicParsing
+$out = Invoke-WebRequest -Uri $downloadUrl -OutFile $outFile -PassThru -UseBasicParsing
 Write-Output "Downloaded stuscode $out.StatusCode"
 Add-AppPackage -Path $outFile
 Write-Output 'Testing for Winget'
@@ -20,6 +31,3 @@ catch {
         Write-Output 'Could not install winget'
     }
 }
-
-
-#Winget Upgrade Winget --accept-source-agreements --accept-package-agreements
