@@ -17,7 +17,7 @@ catch {
         Write-Output 'Winget Present from local'
     }
     catch {
-        Write-OutPut 'Could not install winget'
+        Write-Output 'Could not install winget'
     }
 }
 
