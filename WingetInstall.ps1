@@ -1,4 +1,4 @@
-Write-OutPut 'Starting WingetInstall.ps1 Jim'
+Write-Output 'Starting WingetInstall.ps1 Jim'
 $repoOwner = "Microsoft"
 $repoName = "winget-cli"
 
