@@ -1,3 +1,4 @@
+Write-OutPut 'Starting WingetInstall.ps1 Jim'
 $repoOwner = "Microsoft"
 $repoName = "winget-cli"
 
@@ -7,9 +8,7 @@ $releaseInfo = Invoke-RestMethod -Uri $releaseUrl
 
 # Get the download URL for the latest release asset
 $downloadUrl = $releaseInfo.assets | Where-Object { $_.browser_download_url.Split('/')[-1] -eq "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" } | Select-Object -ExpandProperty browser_download_url
-
-
-Write-OutPut 'Starting WingetInstall.ps1 Jim'
+Write-Output "Download URL is $downloadUrl"
 $outFile = (Join-Path $env:Temp Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
 Write-Output "Downloadlocation is $outFile"
 $out = Invoke-WebRequest -Uri $downloadUrl -OutFile $outFile -PassThru -UseBasicParsing
