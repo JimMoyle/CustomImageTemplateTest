@@ -12,22 +12,27 @@ Write-Output "Download URL is $downloadUrl"
 $outFile = (Join-Path $env:Temp Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
 Write-Output "Downloadlocation is $outFile"
 $out = Invoke-WebRequest -Uri $downloadUrl -OutFile $outFile
-Write-Output "Downloaded statuscode $out.StatusCode"
-Add-AppPackage -Path $outFile
-Write-Output 'Testing for Winget'
 try {
-    Get-AppxPackage -Name Microsoft.DesktopAppInstaller -ErrorAction Stop
-    Write-Output 'Winget Present From download'
+    Write-Output 'Trying to install downloaded winget'
+    Add-AppPackage -Path $outFile -ErrorAction Stop
 }
 catch {
-    Write-Output 'Trying to add local winget'
-    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction Stop
     try {
-        Get-AppxPackage -Name Microsoft.DesktopAppInstaller -ErrorAction Stop
-        Write-Output 'Winget Present from local'
+        Write-Output 'Trying to register installed winget'
+        Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction Stop
     }
     catch {
         Write-Output 'Could not install winget'
     }
+}
+
+Write-Output 'Testing for Winget Package'
+try {
+    Get-AppxPackage -Name Microsoft.DesktopAppInstaller -ErrorAction Stop
+    Write-Output 'Winget Present'
+}
+catch {
+    Write-Output 'Winget Missing'
+
 }
 Write-Output 'Finished WingetInstall.ps1'
