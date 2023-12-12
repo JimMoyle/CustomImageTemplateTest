@@ -1,9 +1,9 @@
 Write-Output 'Starting WingetInstall.ps1 Jim New'
 $repoOwner = "Microsoft"
 $repoName = "winget-cli"
-
 # Get the latest release information
 $releaseUrl = "https://api.github.com/repos/$repoOwner/$repoName/releases/latest"
+Write-Output "Release URL is $releaseUrl"
 $releaseInfo = Invoke-RestMethod -Uri $releaseUrl
 
 # Get the download URL for the latest release asset
@@ -21,7 +21,7 @@ try {
 }
 catch {
     Write-Output 'Trying to add local winget'
-    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
+    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction Stop
     try {
         Get-AppxPackage -Name Microsoft.DesktopAppInstaller -ErrorAction Stop
         Write-Output 'Winget Present from local'
@@ -30,3 +30,4 @@ catch {
         Write-Output 'Could not install winget'
     }
 }
+Write-Output 'Finished WingetInstall.ps1'
