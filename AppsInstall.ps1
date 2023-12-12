@@ -8,9 +8,10 @@ if ($version.count -ne 1){
     try {
         Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction Stop
         Write-Output 'Winget Registered'
+        Write-Output "Winget Version is $version"
     }
     catch {
-        Write-Output 'Cound not register Winget'
+        Write-Output 'Could not register Winget'
         return
     }
 }
