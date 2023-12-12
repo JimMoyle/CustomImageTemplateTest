@@ -10,7 +10,7 @@ if ($version.count -ne 1){
         Write-Output 'Winget Registered'
     }
     catch {
-        'Cound not register Winget'
+        Write-Output 'Cound not register Winget'
         return
     }
 }
